@@ -106,12 +106,13 @@ public class Life {
 
   // called by manager
   public void mousePressed () {
+    if (!running)
     alive = !alive; //turn cell on and off with mouse press
   }
   public void draw () {    
     if (alive != true)
       fill(0);
-    else 
+    else
     fill( 150 );
     rect(x, y, width, height);
   }

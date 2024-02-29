@@ -31,9 +31,9 @@ public void draw () {
   for (int r = 0; r < NUM_ROWS; r++) {
     for (int c = 0; c < NUM_COLS; c++) {
       buttons[r][c].draw();
-      if (countNeighbors(r,c) == 3){
+      if (countNeighbors(r, c) == 3) {
         buffer[r][c] = true;
-      } else if (countNeighbors(r,c) == 2 && buttons[r][c].getLife()){
+      } else if (countNeighbors(r, c) == 2 && buttons[r][c].getLife()) {
         buffer[r][c] = true;
       } else {
         buffer[r][c] = false;
@@ -45,29 +45,38 @@ public void draw () {
 }
 
 public void keyPressed() {
-  if (running && key == 'e'){
+  if (running && key == 'e') {
     running = false;
   } else if (key == 'e') {
     running = true;
+  } else if (key == 'r' && !running) {
+    for (int r = 0; r < NUM_ROWS; r++) {
+      for (int c = 0; c < NUM_COLS; c++) {
+        int i = (int) (Math.random()*5);
+        if (i >= 4) {buffer[r][c] = true; System.out.println(i);}
+        else {buffer[r][c] = false;}
+      }
+    }
+    copyFromBufferToButtons();
   }
 }
 
 public void copyFromBufferToButtons() {
   //for (int r = 0; r < NUM_ROWS; r++) {
   //  for (int c = 0; r < NUM_COLS; c++)
-        for (int r = 0; r < buttons.length; r++) {
-      for (int c = 0; c < buttons[r].length; c++) {
-        buttons[r][c].setLife(buffer[r][c]);
-      }
+  for (int r = 0; r < buttons.length; r++) {
+    for (int c = 0; c < buttons[r].length; c++) {
+      buttons[r][c].setLife(buffer[r][c]);
     }
   }
-  public void copyFromButtonsToBuffer() {
-    for (int r = 0; r < buttons.length; r++) {
-      for (int c = 0; c < buttons[r].length; c++) {
-        buffer[r][c] = buttons[r][c].getLife();
-      }
+}
+public void copyFromButtonsToBuffer() {
+  for (int r = 0; r < buttons.length; r++) {
+    for (int c = 0; c < buttons[r].length; c++) {
+      buffer[r][c] = buttons[r][c].getLife();
     }
   }
+}
 
 public boolean isValid(int r, int c) {
   if (r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS)
@@ -107,13 +116,13 @@ public class Life {
   // called by manager
   public void mousePressed () {
     if (!running)
-    alive = !alive; //turn cell on and off with mouse press
+      alive = !alive; //turn cell on and off with mouse press
   }
   public void draw () {    
     if (alive != true)
       fill(0);
     else
-    fill( 150 );
+      fill( 150 );
     rect(x, y, width, height);
   }
   public boolean getLife() {

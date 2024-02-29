@@ -53,7 +53,7 @@ public void keyPressed() {
     for (int r = 0; r < NUM_ROWS; r++) {
       for (int c = 0; c < NUM_COLS; c++) {
         int i = (int) (Math.random()*5);
-        if (i >= 4) {buffer[r][c] = true; System.out.println(i);}
+        if (i >= 4) {buffer[r][c] = true;}
         else {buffer[r][c] = false;}
       }
     }
